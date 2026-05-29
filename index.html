@@ -7,178 +7,419 @@
 <title>ECONOMÍA MÓVIL</title>
 
 <style>
-  * { box-sizing: border-box; }
 
-  body {
-    margin: 0;
-    padding: 12px;
-    padding-bottom: 80px;
-    background: #f2f2f2;
-    font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
-    max-width: 480px;
-    margin: auto;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    font-weight: 500;
-    color: #222;
-  }
+*{
+  box-sizing:border-box;
+}
 
-  /* FLOTANTES */
-  #balance, #todayBox {
-    position: fixed;
-    top: 12px;
-    background: white;
-    padding: 10px 14px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    font-size: 18px;
-    font-weight: 700;
-    z-index: 999;
-    cursor: pointer;
-  }
+body{
 
-  #balance { right: 12px; color: #1b7a2f; }
-  #todayBox { right: 120px; color: #2f80ed; }
+  margin:0;
 
-  .panel {
-    background: white;
-    border-radius: 14px;
-    padding: 16px;
-    margin-bottom: 14px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
+  padding:12px;
 
-  h2 { margin: 0 0 12px; font-size: 18px; }
+  background:#f2f2f2;
 
-  .task, .payment {
-    border-radius: 10px;
-    padding: 14px;
-    margin-top: 10px;
-    cursor: pointer;
-  }
+  font-family:
+    "Inter",
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
 
-  .task { background: #ececec; }
-  .task.assigned { background: #dbe9ff; }
-  .payment { background: #ffe7b3; }
-  .paid { background: #b7f5c4; }
+  max-width:480px;
 
-  .price { float: right; font-weight: 700; }
+  margin:auto;
 
-  input {
-    width: 100%;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 16px;
-    text-transform: uppercase;
-  }
+  text-transform:uppercase;
 
-  /* MODAL */
-  .modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
+  letter-spacing:0.6px;
 
-  .modalContent {
-    background: white;
-    width: 92%;
-    max-width: 420px;
-    border-radius: 14px;
-    padding: 16px;
-    max-height: 80vh;
-    overflow: auto;
-  }
+  font-weight:500;
 
-  .closeBtn {
-    margin-top: 12px;
-    background: #333;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    cursor: pointer;
-  }
+  color:#222;
+}
 
-  /* ===== CALENDARIO FIXED ===== */
+/* TOP BAR */
 
-  .calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-    margin-top: 10px;
-  }
+.topBar{
 
-  .cal-head {
-    font-size: 12px;
-    font-weight: 700;
-    text-align: center;
-    padding: 8px 0;
-    color: #666;
-  }
+  position:sticky;
 
-  .day {
-    aspect-ratio: 1/1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  top:0;
 
-    border-radius: 10px;
-    background: #f1f1f1;
-    font-size: 12px;
-    font-weight: 600;
-  }
+  z-index:1000;
 
-  .today {
-    background: #2f80ed;
-    color: white;
-    font-weight: 800;
-  }
+  display:flex;
 
-  /* MOVIMIENTOS */
-  .mov {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 12px;
-    margin-top: 10px;
-    border-radius: 10px;
-    background: #f6f6f6;
-    font-size: 13px;
-  }
+  justify-content:space-between;
 
-  .name { flex: 1; }
-  .amount { width: 80px; text-align: right; font-weight: 700; }
-  .date { width: 140px; text-align: right; font-size: 11px; opacity: 0.7; }
+  align-items:center;
 
-  /* ADMIN */
-  #adminReset {
-    position: fixed;
-    bottom: 12px;
-    left: 12px;
-    right: 12px;
-    background: grey;
-    color: white;
-    text-align: center;
-    padding: 14px;
-    border-radius: 12px;
-    font-weight: 700;
-    cursor: pointer;
-  }
+  background:white;
+
+  padding:16px;
+
+  margin-bottom:14px;
+
+  border-radius:16px;
+
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+
+  backdrop-filter:blur(10px);
+}
+
+#todayBox{
+
+  font-size:17px;
+
+  font-weight:800;
+
+  color:#2f80ed;
+
+  cursor:pointer;
+
+  line-height:1.2;
+}
+
+#balance{
+
+  font-size:26px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  text-align:right;
+}
+
+.positive{
+  color:#1b7a2f !important;
+}
+
+.negative{
+  color:#d64545 !important;
+}
+
+/* PANELS */
+
+.panel{
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:16px;
+
+  margin-bottom:14px;
+
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+h2{
+
+  margin:0 0 12px;
+
+  font-size:18px;
+}
+
+/* TASKS */
+
+.task,
+.payment{
+
+  border-radius:12px;
+
+  padding:14px;
+
+  margin-top:10px;
+
+  cursor:pointer;
+
+  transition:0.2s;
+}
+
+.task{
+  background:#ececec;
+}
+
+.task.assigned{
+  background:#dbe9ff;
+}
+
+.task.disabled{
+
+  background:#d8d8d8;
+
+  opacity:0.45;
+
+  cursor:default;
+}
+
+.recurrent{
+  background:#fff0cf;
+}
+
+.payment{
+  background:#ffe7b3;
+}
+
+.paid{
+  background:#b7f5c4;
+}
+
+.price{
+
+  float:right;
+
+  font-weight:700;
+}
+
+input{
+
+  width:100%;
+
+  border:none;
+
+  outline:none;
+
+  background:transparent;
+
+  font-size:16px;
+
+  text-transform:uppercase;
+}
+
+/* MODALS */
+
+.modal{
+
+  display:none;
+
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(0,0,0,0.5);
+
+  justify-content:center;
+
+  align-items:center;
+
+  z-index:2000;
+}
+
+.modalContent{
+
+  background:white;
+
+  width:92%;
+
+  max-width:440px;
+
+  border-radius:16px;
+
+  padding:16px;
+
+  max-height:80vh;
+
+  overflow:auto;
+}
+
+.closeBtn{
+
+  margin-top:12px;
+
+  background:#333;
+
+  color:white;
+
+  padding:12px;
+
+  border-radius:12px;
+
+  text-align:center;
+
+  cursor:pointer;
+
+  font-weight:700;
+}
+
+/* WALLET */
+
+.walletHeader{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:14px;
+}
+
+.walletTotal{
+
+  font-size:20px;
+
+  font-weight:900;
+}
+
+.mov{
+
+  padding:12px;
+
+  margin-top:10px;
+
+  border-radius:12px;
+
+  background:#f6f6f6;
+}
+
+.movTop{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+}
+
+.movBottom{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-top:8px;
+
+  font-size:11px;
+
+  opacity:0.75;
+}
+
+.name{
+
+  flex:1;
+
+  font-weight:800;
+}
+
+.amount{
+
+  font-weight:900;
+}
+
+.amount.in{
+  color:#1b7a2f;
+}
+
+.amount.out{
+  color:#d64545;
+}
+
+.walletState{
+  font-weight:700;
+}
+
+/* CALENDAR */
+
+.calendar{
+
+  display:grid;
+
+  grid-template-columns:repeat(7,1fr);
+
+  gap:6px;
+
+  margin-top:10px;
+}
+
+.cal-head{
+
+  font-size:12px;
+
+  font-weight:700;
+
+  text-align:center;
+
+  padding:8px 0;
+
+  color:#666;
+}
+
+.day{
+
+  aspect-ratio:1/1;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:10px;
+
+  background:#f1f1f1;
+
+  font-size:12px;
+
+  font-weight:700;
+}
+
+.today{
+
+  background:#2f80ed;
+
+  color:white;
+}
+
+/* RESET */
+
+#adminReset{
+
+  background:#666;
+
+  color:white;
+
+  text-align:center;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+  margin-top:10px;
+
+  margin-bottom:20px;
+
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="todayBox"></div>
-<div id="balance">0 €</div>
+<div class="topBar">
+
+  <div id="todayBox">29/05/26 · 12:00</div>
+
+  <div id="balance">0 €</div>
+
+</div>
 
 <div class="panel">
   <h2>BOLSA DE TAREAS</h2>
   <div id="taskPool"></div>
+</div>
+
+<div class="panel">
+  <h2>TAREAS REITERATIVAS</h2>
+  <div id="recurrentTasks"></div>
 </div>
 
 <div class="panel">
@@ -191,7 +432,8 @@
   <div id="monthlyPayments"></div>
 </div>
 
-<!-- CALENDARIO -->
+<div id="adminReset" onclick="resetAll()">RESET ADMIN</div>
+
 <div class="modal" id="calendarModal">
   <div class="modalContent">
     <h2>CALENDARIO</h2>
@@ -200,112 +442,206 @@
   </div>
 </div>
 
-<!-- WALLET -->
 <div class="modal" id="walletModal">
   <div class="modalContent">
-    <h2>MOVIMIENTOS</h2>
+    <div class="walletHeader">
+      <h2>MOVIMIENTOS</h2>
+      <div id="walletTotal" class="walletTotal">0 €</div>
+    </div>
     <div id="movements"></div>
     <div class="closeBtn" onclick="closeWallet()">CERRAR</div>
   </div>
 </div>
 
-<div id="adminReset" onclick="resetAll()">RESET ADMIN</div>
-
 <script>
 
 let balance = 0;
 
-let tasks = ["LIMPIAR BAÑO","HACER COMIDA","REPARAR MESA"];
+let tasks = ["LIMPIAR BAÑO","REPARAR MESA"];
+
+let recurrentTasks = [
+  { name:"TIRAR BASURA", done:false },
+  { name:"HACER COMIDA", done:false }
+];
+
 let assigned = [];
 
 let payments = [
-  { name: "ALQUILER", cost: 100, paid: false },
-  { name: "BONO COMIDA", cost: 20, paid: false }
+  { name:"ALQUILER", cost:100, paid:false },
+  { name:"BONO COMIDA", cost:20, paid:false }
 ];
 
 let movements = [];
 
-function addMovement(type, amount, label) {
+let lastDay = new Date().toDateString();
+
+/* FORMATO FECHA 24H DD/MM/YY */
+
+function formatDateTime(date = new Date()){
+
+  const dd = String(date.getDate()).padStart(2,"0");
+  const mm = String(date.getMonth()+1).padStart(2,"0");
+  const yy = String(date.getFullYear()).slice(-2);
+
+  const hh = String(date.getHours()).padStart(2,"0");
+  const min = String(date.getMinutes()).padStart(2,"0");
+
+  return `${dd}/${mm}/${yy} ${hh}:${min}`;
+}
+
+/* MOVIMIENTOS */
+
+function addMovement(type, amount, label){
+
   movements.unshift({
     type,
     amount,
     label,
-    date: new Date().toLocaleString()
+    wallet: balance,
+    date: formatDateTime()   // <-- CAMBIO IMPORTANTE
   });
 }
 
-function save() {
-  localStorage.setItem("ecoApp", JSON.stringify({
-    balance, tasks, assigned, payments, movements
-  }));
+/* SAVE */
+
+function save(){
+  localStorage.setItem("ecoApp",
+    JSON.stringify({
+      balance,
+      tasks,
+      recurrentTasks,
+      assigned,
+      payments,
+      movements,
+      lastDay
+    })
+  );
 }
 
-function load() {
+/* LOAD */
+
+function load(){
   const data = localStorage.getItem("ecoApp");
-  if (!data) return;
+  if(!data) return;
+
   const p = JSON.parse(data);
 
   balance = p.balance ?? 0;
   tasks = p.tasks ?? [];
+  recurrentTasks = p.recurrentTasks ?? recurrentTasks;
   assigned = p.assigned ?? [];
   payments = p.payments ?? payments;
   movements = p.movements ?? [];
+  lastDay = p.lastDay ?? new Date().toDateString();
 }
 
-function updateBalance() {
-  document.getElementById("balance").innerText = balance + " €";
+/* BALANCE */
+
+function updateBalance(){
+  const b = document.getElementById("balance");
+
+  b.innerText = balance + " €";
+
+  b.classList.remove("positive","negative");
+
+  if(balance >= 0) b.classList.add("positive");
+  else b.classList.add("negative");
 }
 
-function updateToday() {
+/* DATE */
+
+function updateToday(){
   const d = new Date();
+
+  const day = String(d.getDate()).padStart(2,"0");
+  const month = String(d.getMonth()+1).padStart(2,"0");
+  const year = String(d.getFullYear()).slice(-2);
+
+  const hours = String(d.getHours()).padStart(2,"0");
+  const mins = String(d.getMinutes()).padStart(2,"0");
+
   document.getElementById("todayBox").innerText =
-    d.getDate() + "/" + (d.getMonth()+1);
+    `${day}/${month}/${year} · ${hours}:${mins}`;
+
+  checkNewDay();
+}
+
+/* NUEVO DÍA */
+
+function checkNewDay(){
+  const today = new Date().toDateString();
+
+  if(today !== lastDay){
+    recurrentTasks.forEach(t => t.done = false);
+    lastDay = today;
+    save();
+    render();
+  }
 }
 
 /* TASKS */
-function completeTask(i) {
+
+function completeTask(i){
   const name = assigned[i];
   assigned.splice(i,1);
-  balance += 1;
 
-  addMovement("in", 1, name);
+  balance += 1;
+  addMovement("in",1,name);
 
   save();
   updateBalance();
   render();
 }
 
-function assignTask(i) {
+function assignTask(i){
   assigned.push(tasks[i]);
   tasks.splice(i,1);
+
   save();
   render();
 }
 
-function payMonthly(i) {
-  if (payments[i].paid) return;
+/* REITERATIVAS */
+
+function assignRecurrentTask(i){
+  if(recurrentTasks[i].done) return;
+
+  recurrentTasks[i].done = true;
+  assigned.push(recurrentTasks[i].name);
+
+  save();
+  render();
+}
+
+/* PAGOS */
+
+function payMonthly(i){
+  if(payments[i].paid) return;
+
   payments[i].paid = true;
   balance -= payments[i].cost;
 
-  addMovement("out", payments[i].cost, payments[i].name);
+  addMovement("out",payments[i].cost,payments[i].name);
 
   save();
   updateBalance();
   render();
 }
 
-/* CALENDARIO */
-function openCalendar() {
-  document.getElementById("calendarModal").style.display = "flex";
+/* CALENDAR */
+
+function openCalendar(){
+  document.getElementById("calendarModal").style.display="flex";
   renderCalendar();
 }
 
-function closeCalendar() {
-  document.getElementById("calendarModal").style.display = "none";
+function closeCalendar(){
+  document.getElementById("calendarModal").style.display="none";
 }
 
-function renderCalendar() {
+function renderCalendar(){
   const c = document.getElementById("calendar");
+
   c.innerHTML = "";
 
   const now = new Date();
@@ -315,7 +651,8 @@ function renderCalendar() {
 
   const first = new Date(y,m,1).getDay();
   const days = new Date(y,m+1,0).getDate();
-  const offset = first===0?6:first-1;
+
+  const offset = first===0 ? 6 : first-1;
 
   const week = ["L","M","X","J","V","S","D"];
 
@@ -342,44 +679,67 @@ function renderCalendar() {
 }
 
 /* WALLET */
-function openWallet() {
-  document.getElementById("walletModal").style.display = "flex";
+
+function openWallet(){
+  document.getElementById("walletModal").style.display="flex";
   renderMovements();
 }
 
-function closeWallet() {
-  document.getElementById("walletModal").style.display = "none";
+function closeWallet(){
+  document.getElementById("walletModal").style.display="none";
 }
 
-function renderMovements() {
+function renderMovements(){
   const m = document.getElementById("movements");
+  const total = document.getElementById("walletTotal");
+
+  total.innerText = balance + " €";
+  total.classList.remove("positive","negative");
+
+  if(balance >= 0) total.classList.add("positive");
+  else total.classList.add("negative");
+
   m.innerHTML = "";
 
-  movements.forEach(x => {
+  movements.forEach(x=>{
     const div = document.createElement("div");
     div.className = "mov";
 
     div.innerHTML = `
-      <div class="name">${x.label}</div>
-      <div class="amount">${x.type==="in"?"+":"-"}${x.amount}€</div>
-      <div class="date">${x.date}</div>
+      <div class="movTop">
+        <div class="name">${x.label}</div>
+        <div class="amount ${x.type}">
+          ${x.type==="in" ? "+" : "-"}${x.amount}€
+        </div>
+      </div>
+
+      <div class="movBottom">
+        <div class="walletState ${x.wallet >= 0 ? "positive" : "negative"}">
+          CARTERA: ${x.wallet}€
+        </div>
+        <div>${x.date}</div>
+      </div>
     `;
 
-    div.style.borderLeft = x.type === "in"
-      ? "5px solid #1b7a2f"
-      : "5px solid #d64545";
+    div.style.borderLeft =
+      x.type==="in"
+        ? "5px solid #1b7a2f"
+        : "5px solid #d64545";
 
     m.appendChild(div);
   });
 }
 
 /* RESET */
-function resetAll() {
+
+function resetAll(){
   if(!confirm("RESET COMPLETO?")) return;
 
   balance = 0;
   movements = [];
-  payments = payments.map(p => ({...p, paid:false}));
+
+  payments = payments.map(p=>({...p, paid:false}));
+  recurrentTasks.forEach(t=>t.done=false);
 
   save();
   updateBalance();
@@ -387,33 +747,37 @@ function resetAll() {
 }
 
 /* RENDER */
-function render() {
+
+function render(){
 
   const pool = document.getElementById("taskPool");
+  const recurrentDiv = document.getElementById("recurrentTasks");
   const assignedDiv = document.getElementById("assignedTasks");
   const payDiv = document.getElementById("monthlyPayments");
 
-  pool.innerHTML="";
-  assignedDiv.innerHTML="";
-  payDiv.innerHTML="";
+  pool.innerHTML = "";
+  recurrentDiv.innerHTML = "";
+  assignedDiv.innerHTML = "";
+  payDiv.innerHTML = "";
 
   tasks.forEach((t,i)=>{
-    const d=document.createElement("div");
-    d.className="task";
-    d.innerText=t;
-    d.onclick=()=>assignTask(i);
+    const d = document.createElement("div");
+    d.className = "task";
+    d.innerText = t;
+    d.onclick = ()=>assignTask(i);
     pool.appendChild(d);
   });
 
-  const input=document.createElement("input");
-  input.placeholder="+ NUEVA TAREA";
+  const input = document.createElement("input");
+  input.placeholder = "+ NUEVA TAREA";
 
-  const box=document.createElement("div");
-  box.className="task";
+  const box = document.createElement("div");
+  box.className = "task";
   box.appendChild(input);
 
-  input.onkeydown=e=>{
+  input.onkeydown = e=>{
     if(e.key==="Enter"){
+      if(!input.value.trim()) return;
       tasks.push(input.value.toUpperCase());
       save();
       render();
@@ -422,25 +786,66 @@ function render() {
 
   pool.appendChild(box);
 
+  recurrentTasks.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "task recurrent" + (t.done ? " disabled" : "");
+    d.innerText = t.name;
+    d.onclick = ()=>assignRecurrentTask(i);
+    recurrentDiv.appendChild(d);
+  });
+
+  const recurrentInput = document.createElement("input");
+  recurrentInput.placeholder = "+ NUEVA REITERATIVA";
+
+  const recurrentBox = document.createElement("div");
+  recurrentBox.className = "task recurrent";
+
+  recurrentBox.appendChild(recurrentInput);
+
+  recurrentInput.onkeydown = e=>{
+    if(e.key==="Enter"){
+      if(!recurrentInput.value.trim()) return;
+
+      recurrentTasks.push({
+        name: recurrentInput.value.toUpperCase(),
+        done:false
+      });
+
+      save();
+      render();
+    }
+  };
+
+  recurrentDiv.appendChild(recurrentBox);
+
   assigned.forEach((t,i)=>{
-    const d=document.createElement("div");
-    d.className="task assigned";
-    d.innerText=t;
-    d.onclick=()=>completeTask(i);
+    const d = document.createElement("div");
+    d.className = "task assigned";
+    d.innerText = t;
+    d.onclick = ()=>completeTask(i);
     assignedDiv.appendChild(d);
   });
 
   payments.forEach((p,i)=>{
-    const d=document.createElement("div");
-    d.className="payment"+(p.paid?" paid":"");
-    d.innerHTML=`${p.name}<span class="price">${p.paid?"PAGADO":"-"+p.cost+"€"}</span>`;
-    d.onclick=()=>payMonthly(i);
+    const d = document.createElement("div");
+    d.className = "payment" + (p.paid ? " paid" : "");
+
+    d.innerHTML = `
+      ${p.name}
+      <span class="price">
+        ${p.paid ? "PAGADO" : "-" + p.cost + "€"}
+      </span>
+    `;
+
+    d.onclick = ()=>payMonthly(i);
     payDiv.appendChild(d);
   });
 }
 
 /* INIT */
+
 load();
+checkNewDay();
 updateBalance();
 updateToday();
 render();
@@ -448,7 +853,7 @@ render();
 document.getElementById("balance").onclick = openWallet;
 document.getElementById("todayBox").onclick = openCalendar;
 
-setInterval(updateToday,60000);
+setInterval(updateToday,1000);
 
 </script>
 
